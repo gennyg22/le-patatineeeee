@@ -1,0 +1,40 @@
+<!DOCTYPE html> 
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Per Te</title>
+    <style>
+        body {
+            background-color: #fff5f5;
+            font-family: 'Georgia', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .lettera {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 500px;
+            text-align: center;
+            border: 1px solid #ffccd5;
+        }
+        h1 { color: #d63384; }
+        p { line-height: 1.6; color: #444; font-size: 1.1em; }
+        .cuore { color: #e63946; font-size: 2em; }
+    </style>
+</head>
+<body>
+    <div class="lettera">
+        <div class="cuore">♥</div>
+        <h1>Per [Nome della tua fidanzata]</h1>
+        <p>Qui puoi scrivere tutto quello che provi per lei...</p>
+        <p>Sei la persona più speciale del mondo.</p>
+        <p>Con amore, <br> [Tuo Nome]</p>
+    </div>
+</body>
+</html> 
