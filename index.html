@@ -20,8 +20,8 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden;
-            position: relative;
+            overflow: hidden; 
+            position: relative; 
         }
 
         .container {
@@ -33,13 +33,12 @@
             width: 100%;
             text-align: center;
             border: 2px solid #ffb3c1;
-            z-index: 10;
-            position: relative;
-            max-height: 90vh; /* Se la pagina si allunga, permette di scorrere all'interno */
+            z-index: 10; 
+            position: relative; 
+            max-height: 90vh; 
             overflow-y: auto;
         }
 
-        /* Nasconde la barra di scorrimento nel contenitore per renderlo più elegante */
         .container::-webkit-scrollbar { display: none; }
         .container { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -67,15 +66,14 @@
             cursor: pointer;
             transition: background 0.3s;
             margin-top: 10px;
-            z-index: 11;
-            position: relative;
+            z-index: 11; 
+            position: relative; 
         }
 
         .btn-surprise:hover {
             background-color: #c9184a;
         }
 
-        /* --- STILI PER LA PASSWORD --- */
         #lock-section {
             margin-top: 20px;
             padding: 15px;
@@ -101,9 +99,8 @@
             border-color: #ff4d6d;
         }
 
-        /* --- STILI PER I COUPON --- */
         #hidden-content {
-            display: none; /* Inizialmente nascosto */
+            display: none; 
             animation: fadeIn 1s ease-in-out;
         }
 
@@ -155,14 +152,13 @@
             box-shadow: none;
         }
 
-        /* Stili per i cuori cadenti */
         .heart {
             position: absolute;
             color: #ffb3c1; 
             font-size: 1.5em;
             user-select: none;
-            pointer-events: none;
-            z-index: 1;
+            pointer-events: none; 
+            z-index: 1; 
             animation: fall linear forwards;
         }
 
@@ -210,20 +206,18 @@
     </div>
 
     <script>
-        // --- FUNZIONE PER LA PASSWORD ---
         function checkPassword() {
             const pwd = document.getElementById('password-input').value;
             const errorMsg = document.getElementById('error-msg');
             const lockSection = document.getElementById('lock-section');
             const hiddenContent = document.getElementById('hidden-content');
             
-            // 🔥 CAMBIA QUI LA PASSWORD SEGRETA 🔥
-            // Sostituisci "1234" con la parola o la data che preferisci!
-            if(pwd.toLowerCase().trim() === "GioSkinnyLegend") { 
+            // La password deve essere tutta in minuscolo qui nel codice!
+            // Il programma trasforma in minuscolo quello che lei scrive e li confronta.
+            if(pwd.toLowerCase().trim() === "gioskinnylegend") { 
                 lockSection.style.display = 'none';
                 hiddenContent.style.display = 'block';
                 
-                // Fa esplodere tanti cuori quando indovina la password
                 for(let i=0; i<25; i++) {
                     setTimeout(createHeart, i * 50);
                 }
@@ -232,20 +226,17 @@
             }
         }
 
-        // --- FUNZIONE PER I COUPON ---
         function redeemCoupon(btn) {
             if(!btn.classList.contains('redeemed')) {
                 btn.classList.add('redeemed');
                 btn.innerHTML = "✅ Riscattato! Preparati!";
                 
-                // Lancia qualche cuore per festeggiare il riscatto
                 for(let i=0; i<10; i++) {
                     setTimeout(createHeart, i * 100);
                 }
             }
         }
 
-        // --- FUNZIONE PER I CUORI CADENTI ---
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
@@ -260,11 +251,6 @@
             }, 5000);
         }
 
-        // Crea un nuovo cuore ogni 300 millisecondi
-        setInterval(createHeart, 300);
-    </script>
-</body>
-</html>
         setInterval(createHeart, 300);
     </script>
 </body>
