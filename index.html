@@ -20,8 +20,8 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden; /* Impedisce la comparsa di barre di scorrimento dovute ai cuori */
-            position: relative; /* Necessario per posizionare i cuori rispetto al body */
+            overflow: hidden;
+            position: relative;
         }
 
         .container {
@@ -33,9 +33,15 @@
             width: 100%;
             text-align: center;
             border: 2px solid #ffb3c1;
-            z-index: 10; /* Assicura che il testo sia sopra i cuori */
-            position: relative; /* Necessario per z-index */
+            z-index: 10;
+            position: relative;
+            max-height: 90vh; /* Se la pagina si allunga, permette di scorrere all'interno */
+            overflow-y: auto;
         }
+
+        /* Nasconde la barra di scorrimento nel contenitore per renderlo più elegante */
+        .container::-webkit-scrollbar { display: none; }
+        .container { -ms-overflow-style: none; scrollbar-width: none; }
 
         h1 { 
             font-family: 'Dancing Script', cursive; 
@@ -61,37 +67,107 @@
             cursor: pointer;
             transition: background 0.3s;
             margin-top: 10px;
-            z-index: 11; /* Assicura che il bottone sia cliccabile sopra i cuori */
-            position: relative; /* Necessario per z-index */
+            z-index: 11;
+            position: relative;
         }
 
         .btn-surprise:hover {
             background-color: #c9184a;
         }
 
+        /* --- STILI PER LA PASSWORD --- */
+        #lock-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff9fa;
+            border-radius: 15px;
+            border: 1px dashed #ffb3c1;
+        }
+
+        #password-input {
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid #ffb3c1;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1em;
+            text-align: center;
+            margin-bottom: 10px;
+            width: 80%;
+            max-width: 250px;
+            outline: none;
+        }
+
+        #password-input:focus {
+            border-color: #ff4d6d;
+        }
+
+        /* --- STILI PER I COUPON --- */
+        #hidden-content {
+            display: none; /* Inizialmente nascosto */
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         #extra-message {
-            display: none;
             margin-top: 25px;
             font-family: 'Dancing Script', cursive;
-            font-size: 1.8em;
+            font-size: 2.2em;
             color: #ff4d6d;
+        }
+
+        .coupons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+            align-items: center;
+        }
+
+        .coupon {
+            background-color: white;
+            color: #c9184a;
+            border: 2px dashed #ff4d6d;
+            padding: 12px 20px;
+            border-radius: 15px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+        }
+
+        .coupon:hover {
+            background-color: #fff0f3;
+            transform: scale(1.02);
+        }
+
+        .coupon.redeemed {
+            background-color: #d3f8e2;
+            border-color: #28a745;
+            color: #155724;
+            cursor: default;
+            transform: scale(1);
+            box-shadow: none;
         }
 
         /* Stili per i cuori cadenti */
         .heart {
             position: absolute;
-            color: #ffb3c1; /* Colore rosa chiaro per non disturbare troppo */
+            color: #ffb3c1; 
             font-size: 1.5em;
             user-select: none;
-            pointer-events: none; /* I cuori non interferiscono con i clic */
-            z-index: 1; /* Sotto il testo e il bottone */
+            pointer-events: none;
+            z-index: 1;
             animation: fall linear forwards;
         }
 
         @keyframes fall {
-            to {
-                transform: translateY(105vh); /* Cadono fino a fuori dallo schermo */
-            }
+            to { transform: translateY(105vh); }
         }
     </style>
 </head>
@@ -107,8 +183,26 @@
             Spero che questa versione ti piaccia di più!
         </p>
 
-        <button class="btn-surprise" onclick="showSurprise()">C'è una cosa che devi sapere...</button>
-        <div id="extra-message">Puzzi tantissimo ma ti amo lo stesso!!! ❤️</div>
+        <div id="lock-section">
+            <p style="font-size: 0.9em; margin-bottom: 10px;">🔒 Inserisci la nostra password segreta per continuare:</p>
+            <input type="text" id="password-input" placeholder="Scrivi qui...">
+            <br>
+            <button class="btn-surprise" onclick="checkPassword()">Sblocca la sorpresa</button>
+            <p id="error-msg" style="color: red; display: none; font-size: 0.8em; margin-top: 10px; margin-bottom: 0;">Password errata, riprova! 😜</p>
+        </div>
+
+        <div id="hidden-content">
+            <div id="extra-message">Puzzi tantissimo ma ti amo lo stesso!!! ❤️</div>
+            
+            <h2 style="font-family: 'Dancing Script', cursive; color: #c9184a; margin-top: 30px; font-size: 2em;">I tuoi Coupon Speciali:</h2>
+            <p style="font-size: 0.9em; margin-top: -10px;">Clicca su un coupon per riscattarlo (usali con saggezza!)</p>
+            
+            <div class="coupons-container">
+                <button class="coupon" onclick="redeemCoupon(this)">🍕 KEBAB OFFERTO</button>
+                <button class="coupon" onclick="redeemCoupon(this)">❤️ 100 bacini</button>
+                <button class="coupon" onclick="redeemCoupon(this)">💆‍♀️ Massaggio di 15 minuti</button>
+            </div>
+        </div>
 
         <p style="margin-top: 30px; font-weight: 600;">
             Mi sono impegnato tantissimo,<br>spero ti piaccia,<br>Genny
@@ -116,28 +210,61 @@
     </div>
 
     <script>
-        function showSurprise() {
-            const msg = document.getElementById('extra-message');
-            msg.style.display = 'block';
+        // --- FUNZIONE PER LA PASSWORD ---
+        function checkPassword() {
+            const pwd = document.getElementById('password-input').value;
+            const errorMsg = document.getElementById('error-msg');
+            const lockSection = document.getElementById('lock-section');
+            const hiddenContent = document.getElementById('hidden-content');
+            
+            // 🔥 CAMBIA QUI LA PASSWORD SEGRETA 🔥
+            // Sostituisci "1234" con la parola o la data che preferisci!
+            if(pwd.toLowerCase().trim() === "GioSkinnyLegend") { 
+                lockSection.style.display = 'none';
+                hiddenContent.style.display = 'block';
+                
+                // Fa esplodere tanti cuori quando indovina la password
+                for(let i=0; i<25; i++) {
+                    setTimeout(createHeart, i * 50);
+                }
+            } else {
+                errorMsg.style.display = 'block';
+            }
         }
 
-        // Funzione per creare un cuore cadente
+        // --- FUNZIONE PER I COUPON ---
+        function redeemCoupon(btn) {
+            if(!btn.classList.contains('redeemed')) {
+                btn.classList.add('redeemed');
+                btn.innerHTML = "✅ Riscattato! Preparati!";
+                
+                // Lancia qualche cuore per festeggiare il riscatto
+                for(let i=0; i<10; i++) {
+                    setTimeout(createHeart, i * 100);
+                }
+            }
+        }
+
+        // --- FUNZIONE PER I CUORI CADENTI ---
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
             heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw'; /* Posizione orizzontale casuale */
-            heart.style.animationDuration = Math.random() * 3 + 2 + 's'; /* Velocità di caduta casuale */
-            heart.style.opacity = Math.random() * 0.5 + 0.2; /* Opacità casuale per profondità */
+            heart.style.left = Math.random() * 100 + 'vw'; 
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's'; 
+            heart.style.opacity = Math.random() * 0.5 + 0.2; 
             document.body.appendChild(heart);
 
-            // Rimuove il cuore dopo che è caduto per non appesantire la pagina
             setTimeout(() => {
                 heart.remove();
             }, 5000);
         }
 
         // Crea un nuovo cuore ogni 300 millisecondi
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
         setInterval(createHeart, 300);
     </script>
 </body>
