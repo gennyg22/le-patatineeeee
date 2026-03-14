@@ -159,7 +159,7 @@
 
     <div class="container">
         <h1>Bentornata Giò ❤️</h1>
-        <p>I regali li hai sbloccati, ma le sorprese non finiscono mai.</p>
+        <p>SORPRESA.</p>
 
         <div class="polaroid" onclick="changeCaption()">
             <img id="polaroid-img" src="https://images.unsplash.com/photo-1518199266791-5375a83164ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Noi">
@@ -202,7 +202,6 @@
         }
 
         // --- 2. GENERATORE DI SORRISI ---
-        // 🔥 PUOI AGGIUNGERE O MODIFICARE QUESTE FRASI COME VUOI 🔥
         const smiles = [
             "Ricordati che puzzi.",
             "Sei la mia persona preferita.",
@@ -224,7 +223,7 @@
             "E' NOTTE ALTA E SONO SVEGLIO",
             "SEI SEMPRE TU IL MIO CHIODO FISSO",
             "sono orgoglioso di te",
-            "dobbiamo andare alle terme".
+            "dobbiamo andare alle terme" // <-- Qui ho rimosso il punto finale che bloccava tutto!
         ];
 
         function generateSmile() {
@@ -241,7 +240,7 @@
 
         // --- 3. COUNTDOWN ---
         // 🔥 MODIFICA LA DATA QUI (Anno-Mese-GiornoTHre:Minuti:Secondi) 🔥
-        const targetDate = new Date("2024-05-01T15:00:00").getTime(); 
+        const targetDate = new Date("2026-05-01T15:00:00").getTime(); 
 
         setInterval(() => {
             const now = new Date().getTime();
