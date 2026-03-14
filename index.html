@@ -113,14 +113,17 @@
         .smile-box {
             min-height: 80px;
             margin-top: 20px;
-            font-family: 'Dancing Script', cursive;
-            font-size: 2em;
-            color: #ff4d6d;
-            line-height: 1.2;
+            /* Font richiesto: Serio, nero e in grassetto */
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            font-size: 1.3em;
+            color: #000000;
+            line-height: 1.3;
             transition: opacity 0.4s;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 10px;
         }
 
         /* --- STILE COUNTDOWN --- */
@@ -161,8 +164,8 @@
         <h1>Bentornata Giò ❤️</h1>
         <p>SORPRESA.</p>
 
-        <div class="polaroid" onclick="changeCaption()">
-            <img id="polaroid-img" src="https://images.unsplash.com/photo-1518199266791-5375a83164ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Noi">
+        <div class="polaroid" onclick="showHeartsOnly()">
+            <img id="polaroid-img" src="INSERISCI_QUI_IL_NOME_DEL_TUO_FILE.jpg" alt="Un gattino speciale per Giò">
             <div class="polaroid-caption" id="polaroid-text">Clicca sulla foto ✨</div>
         </div>
 
@@ -181,24 +184,8 @@
 
     <script>
         // --- 1. POLAROID INTERATTIVA ---
-        let polaroidState = 0;
-        function changeCaption() {
-            const text = document.getElementById('polaroid-text');
-            text.style.opacity = 0; // Inizia dissolvenza
-            
-            setTimeout(() => {
-                if(polaroidState === 0) {
-                    text.innerText = "Siamo bellissimi! 💖";
-                    polaroidState = 1;
-                } else {
-                    text.innerText = "Clicca sulla foto ✨";
-                    polaroidState = 0;
-                }
-                text.style.opacity = 1; // Fine dissolvenza
-            }, 300);
-            
-            // Lancia qualche cuoricino al click
-            for(let i=0; i<5; i++) { setTimeout(createHeart, i * 100); }
+        function showHeartsOnly() {
+            for(let i=0; i<8; i++) { setTimeout(createHeart, i * 80); }
         }
 
         // --- 2. GENERATORE DI SORRISI ---
@@ -223,23 +210,21 @@
             "E' NOTTE ALTA E SONO SVEGLIO",
             "SEI SEMPRE TU IL MIO CHIODO FISSO",
             "sono orgoglioso di te",
-            "dobbiamo andare alle terme" // <-- Qui ho rimosso il punto finale che bloccava tutto!
+            "dobbiamo andare alle terme"
         ];
 
         function generateSmile() {
             const box = document.getElementById('smile-box');
-            box.style.opacity = 0; // Inizia dissolvenza
+            box.style.opacity = 0; 
             
             setTimeout(() => {
-                // Sceglie una frase a caso dalla lista "smiles"
                 const randomIndex = Math.floor(Math.random() * smiles.length);
                 box.innerText = smiles[randomIndex];
-                box.style.opacity = 1; // Fine dissolvenza
+                box.style.opacity = 1; 
             }, 400);
         }
 
         // --- 3. COUNTDOWN ---
-        // 🔥 MODIFICA LA DATA QUI (Anno-Mese-GiornoTHre:Minuti:Secondi) 🔥
         const targetDate = new Date("2026-05-01T15:00:00").getTime(); 
 
         setInterval(() => {
