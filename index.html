@@ -7,9 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             background: #fff0f3;
@@ -46,16 +44,52 @@
             font-family: 'Dancing Script', cursive; 
             color: #c9184a; 
             font-size: 3em; 
-            margin: 0 0 20px 0;
+            margin: 0 0 10px 0;
         }
 
         p { 
-            line-height: 1.8; 
+            line-height: 1.6; 
             color: #590d22; 
             font-size: 1.1em; 
             margin: 0 0 20px 0;
         }
 
+        /* --- STILE POLAROID --- */
+        .polaroid {
+            background: #fff;
+            padding: 15px 15px 35px 15px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            display: inline-block;
+            transform: rotate(-3deg);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+            cursor: pointer;
+            border: 1px solid #eaeaea;
+            margin: 15px 0 25px 0;
+            max-width: 85%;
+            border-radius: 2px;
+        }
+
+        .polaroid:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: auto;
+            border-radius: 3px;
+            display: block;
+        }
+
+        .polaroid-caption {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8em;
+            color: #c9184a;
+            margin-top: 15px;
+            transition: opacity 0.3s;
+        }
+
+        /* --- STILE GENERATORE DI SORRISI --- */
         .btn-surprise {
             background-color: #ff4d6d;
             color: white;
@@ -64,104 +98,32 @@
             border-radius: 50px;
             font-size: 1em;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.2s;
             margin-top: 10px;
-            z-index: 11; 
-            position: relative; 
             font-family: 'Quicksand', sans-serif;
             font-weight: 600;
+            box-shadow: 0 4px 10px rgba(255, 77, 109, 0.3);
         }
 
         .btn-surprise:hover {
             background-color: #c9184a;
+            transform: translateY(-2px);
         }
 
-        #lock-section {
-            margin-top: 30px;
-            padding: 15px;
-            background-color: #fff9fa;
-            border-radius: 15px;
-            border: 1px dashed #ffb3c1;
-        }
-
-        #password-input {
-            padding: 10px;
-            border-radius: 10px;
-            border: 2px solid #ffb3c1;
-            font-family: 'Quicksand', sans-serif;
-            font-size: 1em;
-            text-align: center;
-            margin-bottom: 10px;
-            width: 80%;
-            max-width: 250px;
-            outline: none;
-        }
-
-        #password-input:focus {
-            border-color: #ff4d6d;
-        }
-
-        #hidden-content {
-            display: none; 
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- STILI GIOCHI --- */
-        
-        /* 1. Biscotto */
-        #cookie-game {
-            margin: 10px auto 20px auto;
-            padding: 15px;
-            background: #fff9fa;
-            border-radius: 15px;
-            cursor: pointer;
-            display: inline-block;
-            transition: transform 0.2s;
-            border: 1px dashed #ffb3c1;
-        }
-        #cookie-game:hover { transform: scale(1.05); }
-        #cookie-icon { font-size: 3em; line-height: 1; margin-bottom: 5px; }
-        
-        /* 2. Gratta e Vinci */
-        .scratch-wrapper {
-            position: relative;
-            width: 100%;
-            height: 120px;
-            margin: 20px 0;
-            border-radius: 15px;
-            overflow: hidden;
-            background-color: #fff0f3;
-            border: 2px solid #ffb3c1;
+        .smile-box {
+            min-height: 80px;
+            margin-top: 20px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2em;
+            color: #ff4d6d;
+            line-height: 1.2;
+            transition: opacity 0.4s;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        
-        /* Nuovo font per il contenuto del Gratta e Vinci (NO Corsivo) */
-        .scratch-content {
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 700;
-            font-size: 1.3em;
-            color: #c9184a;
-            padding: 15px;
-            line-height: 1.4;
-        }
-        
-        #scratch-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            cursor: crosshair;
-        }
 
-        /* 3. Countdown */
+        /* --- STILE COUNTDOWN --- */
         #countdown-section {
             margin-top: 30px;
             padding-top: 20px;
@@ -177,43 +139,7 @@
             margin-top: 5px;
         }
 
-        /* Coupon */
-        .coupons-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 15px;
-            align-items: center;
-        }
-
-        .coupon {
-            background-color: white;
-            color: #c9184a;
-            border: 2px dashed #ff4d6d;
-            padding: 12px 20px;
-            border-radius: 15px;
-            font-size: 1em;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 600;
-        }
-
-        .coupon:hover {
-            background-color: #fff0f3;
-            transform: scale(1.02);
-        }
-
-        .coupon.redeemed {
-            background-color: #d3f8e2;
-            border-color: #28a745;
-            color: #155724;
-            cursor: default;
-            transform: scale(1);
-            box-shadow: none;
-        }
-
+        /* --- CUORI CADENTI --- */
         .heart {
             position: absolute;
             color: #ffb3c1; 
@@ -232,97 +158,97 @@
 <body>
 
     <div class="container">
-        <h1>Ciao Giò ❤️</h1>
-        
-        <p>
-            CIAO, questa è una letterina digitale per te.
-        </p>
-        <p>
-            Oggi è la festa della donna, ma (ancora più importante) <strong>OGGI È IL TUO COMPLEANNO DA CELIACA</strong>. Volevo regalarti dei biscotti tipo buonissimi se fossi stata qui, però ci arrangiamo come possiamo, e ho pensato di usare le mie doti (molto ridotte) da futuro ingegnere per prepararti qualcosa di carino, qualcosa di non scontato, spero ti piaccia.
-        </p>
+        <h1>Bentornata Giò ❤️</h1>
+        <p>I regali li hai sbloccati, ma le sorprese non finiscono mai.</p>
 
-        <div id="cookie-game" onclick="eatCookie()">
-            <div id="cookie-icon">🍪</div>
-            <div id="cookie-text" style="font-weight: 600; color: #c9184a; font-size: 0.9em;">Clicca per mangiarlo!</div>
+        <div class="polaroid" onclick="changeCaption()">
+            <img id="polaroid-img" src="https://images.unsplash.com/photo-1518199266791-5375a83164ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Noi">
+            <div class="polaroid-caption" id="polaroid-text">Clicca sulla foto ✨</div>
         </div>
 
-        <p>
-            In fondo alla pagina (dopo che avrai indovinato la password top secret) troverai dei coupon segreti che potrai riscattare (mandami lo screen quando lo fai). 
-        </p>
-        <p>
-            Sono sicuro che diventerai una grande DONNA, più di quanto tu non sia oggi e (detto tra noi) spero con tutto il mio cuore che, oltre a diventare una grande donna, tu possa essere anche la <strong>DONNA della mia vita</strong>. E se così non dovesse essere non rimpiangerò mai nulla, qualsiasi cosa accada, perché stare con te mi ha insegnato ad amare nel modo più sincero possibile e di questo te ne sarò per sempre grato.
-        </p>
-            Per me sei tu l’amore Gio.
-        </p>
-
-        <div id="lock-section">
-            <p style="font-size: 0.9em; margin-bottom: 10px;">🔒 Inserisci la password segreta per sbloccare i regali:</p>
-            <input type="text" id="password-input" placeholder="Scrivi qui...">
-            <br>
-            <button class="btn-surprise" onclick="checkPassword()">Sblocca la sorpresa</button>
-            <p id="error-msg" style="color: red; display: none; font-size: 0.8em; margin-top: 10px; margin-bottom: 0;">Password errata, riprova! 😜</p>
-        </div>
-
-        <div id="hidden-content">
-            
-            <h2 style="font-family: 'Quicksand', sans-serif; font-weight: 700; color: #c9184a; margin-top: 20px; font-size: 1.4em; line-height: 1.3;">
-                Non è un Turista per sempre,<br>ma gratta lo stesso 🎟️
-            </h2>
-            
-            <div class="scratch-wrapper">
-                <div class="scratch-content">
-                    HAI VINTO 100 BACINI, COMPLIMENTI!!! ❤️
-                </div>
-                <canvas id="scratch-canvas"></canvas>
-            </div>
-
-            <h2 style="font-family: 'Quicksand', sans-serif; font-weight: 700; color: #c9184a; margin-top: 30px; font-size: 1.4em;">I tuoi Coupon Speciali:</h2>
-            <p style="font-size: 0.9em; margin-top: -5px;">Clicca su un coupon per riscattarlo (usali con saggezza!)</p>
-            
-            <div class="coupons-container">
-                <button class="coupon" onclick="redeemCoupon(this)">🍕 KEBAB OFFERTO</button>
-                <button class="coupon" onclick="redeemCoupon(this)">❤️ CENA DA GINO</button>
-                <button class="coupon" onclick="redeemCoupon(this)">💆‍♀️ Massaggio di 15 minuti</button>
-            </div>
+        <div style="margin-top: 10px;">
+            <p style="font-weight: 600; color: #590d22; margin-bottom: 5px;">Se hai una giornata no, o ti manco:</p>
+            <button class="btn-surprise" onclick="generateSmile()">Ho bisogno di un sorriso</button>
+            <div id="smile-box" class="smile-box">...</div>
         </div>
 
         <div id="countdown-section">
-            <p style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 1.1em; margin: 0; color: #590d22;">ci vediamo domani (più o meno):</p>
+            <p style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 1.1em; margin: 0; color: #590d22;">Al nostro prossimo incontro mancano:</p>
             <div id="timer">Calcolando...</div>
         </div>
 
-        <p style="margin-top: 30px; font-weight: 600;">
-            Mi sono impegnato tantissimo,<br>spero di averti strappato un sorriso,<br>ti amo.<br>Genny
-        </p>
     </div>
 
     <script>
-        // --- GIOCO DEL BISCOTTO ---
-        let cookieClicks = 0;
-        function eatCookie() {
-            cookieClicks++;
-            const icon = document.getElementById('cookie-icon');
-            const text = document.getElementById('cookie-text');
-            if (cookieClicks === 1) {
-                icon.innerText = '🍘'; 
-                text.innerText = 'VAI PIANO, NON TI AFFOGARE';
-            } else if (cookieClicks === 2) {
-                icon.innerText = '✨'; 
-                text.innerText = 'Finiti! ORA VAI A FARE LA CACCA!';
-                document.getElementById('cookie-game').style.cursor = 'default';
-            }
+        // --- 1. POLAROID INTERATTIVA ---
+        let polaroidState = 0;
+        function changeCaption() {
+            const text = document.getElementById('polaroid-text');
+            text.style.opacity = 0; // Inizia dissolvenza
+            
+            setTimeout(() => {
+                if(polaroidState === 0) {
+                    text.innerText = "Siamo bellissimi! 💖";
+                    polaroidState = 1;
+                } else {
+                    text.innerText = "Clicca sulla foto ✨";
+                    polaroidState = 0;
+                }
+                text.style.opacity = 1; // Fine dissolvenza
+            }, 300);
+            
+            // Lancia qualche cuoricino al click
+            for(let i=0; i<5; i++) { setTimeout(createHeart, i * 100); }
         }
 
-        // --- COUNTDOWN ---
-        // 🔥 MODIFICA LA DATA QUI (Anno-Mese-GiornoTHre:Minuti:Secondi)
-        const targetDate = new Date("2026-03-12T18:30:00").getTime(); 
+        // --- 2. GENERATORE DI SORRISI ---
+        // 🔥 PUOI AGGIUNGERE O MODIFICARE QUESTE FRASI COME VUOI 🔥
+        const smiles = [
+            "Ricordati che puzzi.",
+            "Sei la mia persona preferita.",
+            "ODIO RIETI",
+            "Non vedo l'ora di riabbracciarti fortissimo.",
+            "LE PATATINEEEE",
+            "sei bellissima quando sorridi",
+            "a femmn chiu bell ro munn",
+            "si a vita mi!!!!!.",
+            "LA COCACOLAAAAAA",
+            "CURAMI DOTTORESSA",
+            "BAU BAU",
+            "ti amo",
+            "GGGP",
+            "zibbellino",
+            "miao miao miao",
+            "di che colore sono i tuoi occhi?",
+            "ti penso sempre",
+            "E' NOTTE ALTA E SONO SVEGLIO",
+            "SEI SEMPRE TU IL MIO CHIODO FISSO",
+            "sono orgoglioso di te",
+            "dobbiamo andare alle terme".
+        ];
+
+        function generateSmile() {
+            const box = document.getElementById('smile-box');
+            box.style.opacity = 0; // Inizia dissolvenza
+            
+            setTimeout(() => {
+                // Sceglie una frase a caso dalla lista "smiles"
+                const randomIndex = Math.floor(Math.random() * smiles.length);
+                box.innerText = smiles[randomIndex];
+                box.style.opacity = 1; // Fine dissolvenza
+            }, 400);
+        }
+
+        // --- 3. COUNTDOWN ---
+        // 🔥 MODIFICA LA DATA QUI (Anno-Mese-GiornoTHre:Minuti:Secondi) 🔥
+        const targetDate = new Date("2024-05-01T15:00:00").getTime(); 
 
         setInterval(() => {
             const now = new Date().getTime();
             const distance = targetDate - now;
 
             if (distance < 0) {
-                document.getElementById("timer").innerHTML = "ARRIVO!";
+                document.getElementById("timer").innerHTML = "ARRIVO! ❤️";
                 return;
             }
 
@@ -334,86 +260,7 @@
             document.getElementById("timer").innerHTML = `${days}g ${hours}h ${minutes}m ${seconds}s`;
         }, 1000);
 
-        // --- PASSWORD E GRATTA E VINCI ---
-        function checkPassword() {
-            const pwd = document.getElementById('password-input').value;
-            const errorMsg = document.getElementById('error-msg');
-            const lockSection = document.getElementById('lock-section');
-            const hiddenContent = document.getElementById('hidden-content');
-            
-            if(pwd.toLowerCase().trim() === "gioskinnylegend") { 
-                lockSection.style.display = 'none';
-                hiddenContent.style.display = 'block';
-                
-                // Inizializza il Gratta e Vinci solo dopo aver sbloccato l'area!
-                initScratchCard();
-                
-                for(let i=0; i<25; i++) {
-                    setTimeout(createHeart, i * 50);
-                }
-            } else {
-                errorMsg.style.display = 'block';
-            }
-        }
-
-        // --- FUNZIONE PER IL GRATTA E VINCI ---
-        function initScratchCard() {
-            const canvas = document.getElementById('scratch-canvas');
-            const ctx = canvas.getContext('2d');
-            
-            canvas.width = canvas.parentElement.offsetWidth;
-            canvas.height = canvas.parentElement.offsetHeight;
-            
-            // Colore della patina da grattare
-            ctx.fillStyle = '#c5c5c5';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Testo sopra la patina
-            ctx.font = 'bold 20px Quicksand';
-            ctx.fillStyle = '#666';
-            ctx.textAlign = 'center';
-            ctx.fillText('Gratta col dito!', canvas.width/2, canvas.height/2 + 7);
-
-            let isDrawing = false;
-
-            function getMousePos(e) {
-                const rect = canvas.getBoundingClientRect();
-                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-                return { x: clientX - rect.left, y: clientY - rect.top };
-            }
-
-            function scratch(e) {
-                if (!isDrawing) return;
-                e.preventDefault(); 
-                const pos = getMousePos(e);
-                ctx.globalCompositeOperation = 'destination-out';
-                ctx.beginPath();
-                ctx.arc(pos.x, pos.y, 25, 0, Math.PI * 2); // Raggio della gomma
-                ctx.fill();
-            }
-
-            canvas.addEventListener('mousedown', () => isDrawing = true);
-            canvas.addEventListener('mouseup', () => isDrawing = false);
-            canvas.addEventListener('mousemove', scratch);
-            canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); });
-            canvas.addEventListener('touchend', () => isDrawing = false);
-            canvas.addEventListener('touchmove', scratch, {passive: false});
-        }
-
-        // --- COUPON ---
-        function redeemCoupon(btn) {
-            if(!btn.classList.contains('redeemed')) {
-                btn.classList.add('redeemed');
-                btn.innerHTML = "✅ Riscattato! Preparati!";
-                
-                for(let i=0; i<10; i++) {
-                    setTimeout(createHeart, i * 100);
-                }
-            }
-        }
-
-        // --- CUORI CADENTI ---
+        // --- 4. CUORI CADENTI ---
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
