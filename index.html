@@ -113,7 +113,6 @@
         .smile-box {
             min-height: 80px;
             margin-top: 20px;
-            /* Font richiesto: Serio, nero e in grassetto */
             font-family: 'Quicksand', sans-serif;
             font-weight: 700;
             font-size: 1.3em;
@@ -149,7 +148,7 @@
             font-size: 1.5em;
             user-select: none;
             pointer-events: none; 
-            z-index: 1; 
+            z-index: 1; /* Di base stanno dietro */
             animation: fall linear forwards;
         }
 
@@ -164,28 +163,57 @@
         <h1>Bentornata Giò ❤️</h1>
         <p>SORPRESA.</p>
 
-        <div class="polaroid" onclick="showHeartsOnly()">
-            <img id="polaroid-img" src="INSERISCI_QUI_IL_NOME_DEL_TUO_FILE.jpg" alt="Un gattino speciale per Giò">
-            <div class="polaroid-caption" id="polaroid-text">Clicca sulla foto ✨</div>
+        <div class="polaroid" onclick="changeCaption()">
+            <img id="polaroid-img" src="image_14881b.png" alt="Un gattino speciale per Giò">
+            <div class="polaroid-caption" id="polaroid-text">Clicca sulla foto </div>
         </div>
 
         <div style="margin-top: 10px;">
             <p style="font-weight: 600; color: #590d22; margin-bottom: 5px;">Se hai una giornata no, o ti manco:</p>
-            <button class="btn-surprise" onclick="generateSmile()">Ho bisogno di un sorriso</button>
+            <button class="btn-surprise" onclick="generateSmile()">Ho bisogno di un sorriso, (la maggior parte delle frasi sono prive di senso logico)</button>
             <div id="smile-box" class="smile-box">...</div>
         </div>
 
         <div id="countdown-section">
-            <p style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 1.1em; margin: 0; color: #590d22;">Al nostro prossimo incontro mancano:</p>
+            <p style="font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 1.1em; margin: 0; color: #590d22;">Ci vediamo domani (piu o meno):</p>
             <div id="timer">Calcolando...</div>
         </div>
 
     </div>
 
     <script>
-        // --- 1. POLAROID INTERATTIVA ---
-        function showHeartsOnly() {
-            for(let i=0; i<8; i++) { setTimeout(createHeart, i * 80); }
+        // --- 1. POLAROID INTERATTIVA (CORRETTA) ---
+        let polaroidState = 0;
+        function changeCaption() {
+            const text = document.getElementById('polaroid-text');
+            text.style.opacity = 0; // Inizia dissolvenza
+            
+            setTimeout(() => {
+                if(polaroidState === 0) {
+                    text.innerText = "Miao!"; // <-- Puoi cambiare questa frase se vuoi!
+                    polaroidState = 1;
+                } else {
+                    text.innerText = "Clicca sulla foto ✨";
+                    polaroidState = 0;
+                }
+                text.style.opacity = 1; // Fine dissolvenza
+            }, 300);
+            
+            // Lancia i cuoricini in PRIMO PIANO (z-index 99) al click!
+            for(let i=0; i<8; i++) { 
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + 'vw'; 
+                    heart.style.animationDuration = Math.random() * 3 + 2 + 's'; 
+                    heart.style.opacity = Math.random() * 0.5 + 0.5; 
+                    heart.style.zIndex = "99"; // <-- Li fa cadere SOPRA il riquadro bianco
+                    document.body.appendChild(heart);
+
+                    setTimeout(() => { heart.remove(); }, 5000);
+                }, i * 100); 
+            }
         }
 
         // --- 2. GENERATORE DI SORRISI ---
@@ -193,13 +221,14 @@
             "Ricordati che puzzi.",
             "Sei la mia persona preferita.",
             "ODIO RIETI",
+            "ODIO MARANO",
             "Non vedo l'ora di riabbracciarti fortissimo.",
             "LE PATATINEEEE",
             "sei bellissima quando sorridi",
             "a femmn chiu bell ro munn",
             "si a vita mi!!!!!.",
             "LA COCACOLAAAAAA",
-            "CURAMI DOTTORESSA",
+            "curami dottoressa XD",
             "BAU BAU",
             "ti amo",
             "GGGP",
@@ -207,10 +236,16 @@
             "miao miao miao",
             "di che colore sono i tuoi occhi?",
             "ti penso sempre",
-            "E' NOTTE ALTA E SONO SVEGLIO",
+            "Se dovessi scegliere tra te e il sonno… probabilmente sceglierei te",
+            "vuoi una foto sexy????"
+            "ti mangio",
+            "signora dottoraaaaaa",
+            "non rilassarti troppo",
+            "sei la più bella dl mondo",
             "SEI SEMPRE TU IL MIO CHIODO FISSO",
             "sono orgoglioso di te",
-            "dobbiamo andare alle terme"
+            "dobbiamo andare alle terme",
+            "Ti tengo perché ormai ti ho preso in affitto nel mio cuore e il contratto non scade.".
         ];
 
         function generateSmile() {
@@ -225,7 +260,7 @@
         }
 
         // --- 3. COUNTDOWN ---
-        const targetDate = new Date("2026-05-01T15:00:00").getTime(); 
+        const targetDate = new Date("2026-01-01T15:00:00").getTime(); 
 
         setInterval(() => {
             const now = new Date().getTime();
@@ -244,7 +279,7 @@
             document.getElementById("timer").innerHTML = `${days}g ${hours}h ${minutes}m ${seconds}s`;
         }, 1000);
 
-        // --- 4. CUORI CADENTI ---
+        // --- 4. CUORI CADENTI SULLO SFONDO ---
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
